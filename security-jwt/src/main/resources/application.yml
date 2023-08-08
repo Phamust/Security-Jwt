@@ -19,6 +19,6 @@ spring:
     security:
       jwt:
         secret-key: PYzYbnzeQbkK4CCgbKBsn+PFxcjBCAXckQ+808Wz7oU=
-        expiration: 86400000 #one day
+        expiration: 60000 #one day
         refreshToken:
           expiration: 604800000 #one week
