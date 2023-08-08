@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Token {
+public class Token  {
 
     @Id
     @SequenceGenerator(
