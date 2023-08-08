@@ -1,4 +1,5 @@
 package io.phamust.securityjwt.appuser;
+import io.phamust.securityjwt.security.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -31,6 +33,8 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
     private Boolean locked = false;
     private Boolean enabled = false;
 
