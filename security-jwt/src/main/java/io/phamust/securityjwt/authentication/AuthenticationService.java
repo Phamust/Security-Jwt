@@ -37,10 +37,12 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .appUserRole(AppUserRole.USER)
                 .build();
-        appUserRepository.save(user);
-        String jwtToken = jwtService.generateToken(user);
+        var savedUser = appUserRepository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 
@@ -98,6 +100,7 @@ public class AuthenticationService {
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
+                //Using ObjectMapper as the method returns void
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
